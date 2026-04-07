@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :reports
+  resources :report_templates do
+    resource :reports, only: [:new, :create]
+    end
+
+  resources :reports, only: [:index, :show, :destroy, :update, :edit]
+  resources :report_entries
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "about", to: "pages#about"
   get "main", to: "pages#main"
-  get "new", to: "reports#new"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

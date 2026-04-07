@@ -7,3 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+User.destroy_all
+Company.destroy_all
+ReportTemplate.destroy_all
+
+amine = User.create!(email: "amine.@chrix.ma", password: "123456", first_name: "Amine")
+
+chrix = Company.create!(name: "Chrix")
+
+ReportTemplate.create!(name: "Template A", description: "template A", company: chrix, user: amine)
+ReportTemplate.create!(name: "Template B", description: "template B", company: chrix, user: amine)
+ReportTemplate.create!(name: "Template C", description: "template C", company: chrix, user: amine)
