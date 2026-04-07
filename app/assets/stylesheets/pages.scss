@@ -1,0 +1,112 @@
+// Landing Page Styles
+
+// Hero Section
+.hero-section {
+  h1 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    opacity: 0.95;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Problem Section
+.problem-section {
+  .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+}
+
+// How It Works
+.how-it-works-section {
+  h2 {
+    font-weight: 700;
+  }
+
+  .rounded-circle {
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+}
+
+// Benefits Section
+.benefits-section {
+  h4 {
+    color: #2c3e50;
+  }
+}
+
+// Testimonials Section
+.testimonials-section {
+  .card {
+    border-left: 4px solid #3498db;
+
+    p.fst-italic {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+// CTA Section
+.cta-section {
+  h2 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  .lead {
+    opacity: 0.95;
+  }
+}
+
+// General spacing
+section {
+  scroll-margin-top: 80px; // Account for fixed navbar if present
+}
+
+// Ensure buttons are accessible
+.btn {
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Mobile optimizations
+@media (max-width: 576px) {
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .display-6 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+}

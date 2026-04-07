@@ -1,4 +1,218 @@
+<<<<<<< HEAD
 <h1>Pages#home xxx </h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+=======
+<!-- HERO SECTION -->
+<section class="hero-section d-flex align-items-center justify-content-center text-white text-center py-5" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); min-height: 500px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="display-4 fw-bold mb-4">Stop Wasting Time on Report Templates</h1>
+        <p class="lead mb-5">Generate professional civil engineering reports in minutes, not hours. From template to PDF—streamlined.</p>
+>>>>>>> 98f95a14bf34d4bae1b437d9c72672cf4f11df04
 
-<%= link_to "our info", about_path %>
+        <% if user_signed_in? %>
+          <%= link_to "Start a New Report", new_report_path, class: "btn btn-light btn-lg me-3" %>
+          <span class="text-muted">Welcome back, <%= @current_user.first_name %>!</span>
+        <% else %>
+          <%= link_to "Get Started Free", new_user_registration_path, class: "btn btn-light btn-lg" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="problem-section py-5" style="background: #fff;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-6 fw-bold mb-4">The Problem</h2>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Problem 1: Repetitive Work -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm text-center p-4">
+          <div style="font-size: 48px; margin-bottom: 20px;">📋</div>
+          <h3 class="h5 fw-bold mb-2">Repetitive Work</h3>
+          <p class="text-muted small">Same structure, different data. Hours lost on formatting.</p>
+        </div>
+      </div>
+
+      <!-- Problem 2: Inconsistency -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm text-center p-4">
+          <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
+          <h3 class="h5 fw-bold mb-2">Inconsistency</h3>
+          <p class="text-muted small">Different formats across projects. Quality varies.</p>
+        </div>
+      </div>
+
+      <!-- Problem 3: Time Pressure -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm text-center p-4">
+          <div style="font-size: 48px; margin-bottom: 20px;">⏰</div>
+          <h3 class="h5 fw-bold mb-2">Time Pressure</h3>
+          <p class="text-muted small">Client deadlines loom. Less time for actual analysis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section class="how-it-works-section py-5" style="background: #f0f4f8;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-6 fw-bold mb-4">How It Works</h2>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Step 1 -->
+      <div class="col-md-4">
+        <div class="text-center">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: #3498db; color: white; width: 60px; height: 60px; font-size: 28px; font-weight: bold;">1</div>
+          <h3 class="h5 fw-bold mb-2">Choose Template</h3>
+          <p class="text-muted small">Select from pre-built report templates for your project type.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="col-md-4">
+        <div class="text-center">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: #3498db; color: white; width: 60px; height: 60px; font-size: 28px; font-weight: bold;">2</div>
+          <h3 class="h5 fw-bold mb-2">Fill in Data</h3>
+          <p class="text-muted small">Enter measurements, observations, and findings in simple forms.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="col-md-4">
+        <div class="text-center">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: #3498db; color: white; width: 60px; height: 60px; font-size: 28px; font-weight: bold;">3</div>
+          <h3 class="h5 fw-bold mb-2">Generate & Share</h3>
+          <p class="text-muted small">Get a polished PDF ready for clients. Done in minutes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY BENEFITS SECTION -->
+<section class="benefits-section py-5" style="background: #fff;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-6 fw-bold mb-4">Why Teams Choose This</h2>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="row g-4">
+          <!-- Benefit 1 -->
+          <div class="col-12">
+            <div class="d-flex gap-3">
+              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
+              <div>
+                <h4 class="fw-bold mb-2">Consistent Quality</h4>
+                <p class="text-muted mb-0">Every report follows your standards. No surprises.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefit 2 -->
+          <div class="col-12">
+            <div class="d-flex gap-3">
+              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
+              <div>
+                <h4 class="fw-bold mb-2">Save 5+ Hours Per Report</h4>
+                <p class="text-muted mb-0">Focus on engineering, not formatting.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefit 3 -->
+          <div class="col-12">
+            <div class="d-flex gap-3">
+              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
+              <div>
+                <h4 class="fw-bold mb-2">Client-Ready in Minutes</h4>
+                <p class="text-muted mb-0">Professional formatting built in. Export as PDF.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefit 4 -->
+          <div class="col-12">
+            <div class="d-flex gap-3">
+              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
+              <div>
+                <h4 class="fw-bold mb-2">Customizable Templates</h4>
+                <p class="text-muted mb-0">Adapt templates to your firm's branding and requirements.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section py-5" style="background: #f0f4f8;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="display-6 fw-bold mb-4">From Teams Like Yours</h2>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Testimonial 1 -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm p-4">
+          <p class="mb-4 text-muted fst-italic">"Cut our report generation time from 8 hours to 2. We can now handle more projects without burning out the team."</p>
+          <div>
+            <strong class="d-block" style="color: #2c3e50;">Sarah Chen</strong>
+            <small class="text-secondary">Senior Engineer, Apex Consulting</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm p-4">
+          <p class="mb-4 text-muted fst-italic">"Clients love the professional reports. It reflects well on our firm and we spend zero time reformatting."</p>
+          <div>
+            <strong class="d-block" style="color: #2c3e50;">Marcus Rodriguez</strong>
+            <small class="text-secondary">Project Manager, BuildRight Inc</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA SECTION -->
+<section class="cta-section d-flex align-items-center justify-content-center py-5 text-white text-center" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="display-6 fw-bold mb-3">Ready to Save Hours on Reports?</h2>
+        <p class="lead mb-4">Start free. No credit card required.</p>
+
+        <% if @user_signed_in %>
+          <%= link_to "Create New Report", new_report_path, class: "btn btn-light btn-lg me-3" %>
+        <% else %>
+          <%= link_to "Create Free Account", new_user_registration_path, class: "btn btn-light btn-lg me-3" %>
+          <p class="text-white-50 mt-3">Or <a href="#" class="text-white" style="text-decoration: underline;">watch a 2-minute demo</a></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
