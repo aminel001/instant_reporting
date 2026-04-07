@@ -7,8 +7,8 @@
         <p class="lead mb-5">Generate professional civil engineering reports in minutes, not hours. From template to PDF—streamlined.</p>
 
         <% if user_signed_in? %>
-          <%= link_to "Start a New Report", new_report_path, class: "btn btn-light btn-lg me-3" %>
-          <span class="text-muted">Welcome back, <%= @current_user.first_name %>!</span>
+          <%= link_to "Start", main_path, class: "btn btn-light btn-lg me-3" %>
+          <span class="text-muted">Welcome back, <%= current_user.first_name %>!</span>
         <% else %>
           <%= link_to "Get Started Free", new_user_registration_path, class: "btn btn-light btn-lg" %>
         <% end %>
@@ -202,7 +202,7 @@
         <p class="lead mb-4">Start free. No credit card required.</p>
 
         <% if @user_signed_in %>
-          <%= link_to "Create New Report", new_report_path, class: "btn btn-light btn-lg me-3" %>
+          <%= link_to "Start", main_path, class: "btn btn-light btn-lg me-3" %>
         <% else %>
           <%= link_to "Create Free Account", new_user_registration_path, class: "btn btn-light btn-lg me-3" %>
         <% end %>

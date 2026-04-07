@@ -4,9 +4,14 @@
       <div class="col-lg-8 mx-auto">
         <h1 class="display-4 fw-bold mb-4">Let's create a new report</h1>
         <p class="lead mb-5">Choose from templates</p>
-            <p class="lead mb-5"><button class="btn btn-light btn-lg me-3">Template A</button> <img src="[logo-url]" alt="preview photo Template B" style="height: 48px;" /></p>
-            <p class="lead mb-5"><button class="btn btn-light btn-lg me-3">Template B</button> <img src="[logo-url]" alt="preview photo Template B" style="height: 48px;" /></p>
-            <p class="lead mb-5"><button class="btn btn-light btn-lg me-3">Template C</button> <img src="[logo-url]" alt="preview photo Template C" style="height: 48px;" /></p>
+            <h1>New report</h1>
+
+              <%= simple_form_for [@report_template, @report] do |f| %>
+                <%= f.input :title %>
+                <%= f.submit "create report", class: "btn btn-primary" %>
+              <% end %>
+
+
       </div>
     </div>
   </div>
