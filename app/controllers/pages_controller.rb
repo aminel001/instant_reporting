@@ -10,4 +10,7 @@ class PagesController < ApplicationController
 
   def main
   end
+
+  def new_report
+  end
 end
