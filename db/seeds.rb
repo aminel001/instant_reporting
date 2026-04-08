@@ -8,11 +8,13 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.destroy_all
-Company.destroy_all
+Report.destroy_all
 ReportTemplate.destroy_all
+Company.destroy_all
+User.destroy_all
 
-amine = User.create!(email: "amine.@chrix.ma", password: "123456", first_name: "Amine")
+
+amine = User.create!(email: "amine.e@chrix.ma", password: "123456", first_name: "Amine")
 
 chrix = Company.create!(name: "Chrix")
 
