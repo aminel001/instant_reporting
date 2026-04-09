@@ -10,8 +10,8 @@
 
 Report.destroy_all
 ReportTemplate.destroy_all
-Company.destroy_all
 User.destroy_all
+Company.destroy_all
 
 chrix = Company.create!(name: "Chrix")
 amine = User.create!(email: "amine.e@chrix.ma", password: "123456", first_name: "Amine", last_name: "EL", company_id: Company.first.id)

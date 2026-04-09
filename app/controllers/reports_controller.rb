@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.status = "Initiated"
+    @report.report_version_number = "1"
     @report.user = current_user
     @report.report_template = ReportTemplate.find(params[:report_template_id])
     if @report.save
