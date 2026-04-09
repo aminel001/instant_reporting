@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_26_182505) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_09_181923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,12 +23,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_26_182505) do
   create_table "report_entries", force: :cascade do |t|
     t.string "value_text"
     t.string "value_json"
-    t.bigint "template_section_id", null: false
     t.bigint "report_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["report_id"], name: "index_report_entries_on_report_id"
-    t.index ["template_section_id"], name: "index_report_entries_on_template_section_id"
   end
 
   create_table "report_templates", force: :cascade do |t|
@@ -56,19 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_26_182505) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
-  create_table "template_sections", force: :cascade do |t|
-    t.string "key"
-    t.string "label"
-    t.string "field_type"
-    t.string "position"
-    t.string "required"
-    t.string "setting"
-    t.bigint "report_template_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["report_template_id"], name: "index_template_sections_on_report_template_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -79,15 +64,17 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_26_182505) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "role"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "report_entries", "reports"
-  add_foreign_key "report_entries", "template_sections"
   add_foreign_key "report_templates", "companies"
   add_foreign_key "report_templates", "users"
   add_foreign_key "reports", "report_templates"
   add_foreign_key "reports", "users"
-  add_foreign_key "template_sections", "report_templates"
+  add_foreign_key "users", "companies"
 end
