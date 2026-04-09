@@ -6,7 +6,7 @@
         <h1 class="display-4 fw-bold mb-4">Main Dashboard</h1>
         <p class="lead mb-5">[Company Name]
           <img src="[logo-url]" alt="Company Logo" style="height: 48px;" /></p>
-            <p class="lead mb-5">Welcome, [Name]</p>
+            <p class="lead mb-5">Welcome <%= current_user.first_name %>!</p>
         <%= link_to "Create New Report A", new_report_template_reports_path(ReportTemplate.first), class: "btn btn-light btn-lg me-3" %>
         <%= link_to "Create New Report B", new_report_template_reports_path(ReportTemplate.second), class: "btn btn-light btn-lg me-3" %>
         <%= link_to "Create New Report C", new_report_template_reports_path(ReportTemplate.third), class: "btn btn-light btn-lg me-3" %>
