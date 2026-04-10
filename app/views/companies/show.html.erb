@@ -1,0 +1,31 @@
+<h1><%= @company.name%></h1>
+<p><%= @company.logo%></p>
+<h1><%= @company.description%></h1>
+<p> list of employees </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Full Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @company.users.each do |user| %>
+      <tr>
+        <td>
+          <% if user.profile_photo.attached? %>
+            <%= image_tag user.profile_photo, width: 50, height: 50 %>
+          <% else %>
+            No photo
+          <% end %>
+        </td>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td><%= user.role %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Edit", edit_company_path%>
+<%= link_to "Back", companies_path%>

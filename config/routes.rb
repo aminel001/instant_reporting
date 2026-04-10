@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: [:registrations]
   root to: "pages#home"
 
   resources :report_templates do
@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
   resources :reports, only: [:index, :show, :destroy, :update, :edit]
   resources :report_entries
-
+  resources :companies
+  resources :users, only: [:create]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
