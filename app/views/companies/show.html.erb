@@ -1,5 +1,5 @@
 <h1><%= @company.name%></h1>
-<p><%= @company.logo%></p>
+<%= cl_image_tag @company.logo.key, height: 30, width: 80%>
 <h1><%= @company.description%></h1>
 <p> list of employees </p>
 <table class="table">
