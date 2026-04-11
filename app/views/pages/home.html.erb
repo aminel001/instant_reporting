@@ -9,8 +9,8 @@
         <% if user_signed_in? %>
           <span class="text-white">Welcome back, <%= current_user.first_name %>!</span>
           <%= link_to "Start", main_path, class: "btn btn-light btn-lg me-3" %>
-        <% else %>
-          <%= link_to "Get Started Free", new_user_registration_path, class: "btn btn-light btn-lg" %>
+        <%# else %>
+          <%# link_to "Get Started Free", new_user_registration_path, class: "btn btn-light btn-lg" %>
         <% end %>
       </div>
     </div>
