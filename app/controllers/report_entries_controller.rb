@@ -3,16 +3,24 @@ class ReportEntriesController < ApplicationController
   def index
   end
 
-  def create
-    @report = Report.find(params[:report_id])
-    @report_entry = ReportEntry.new(report_entry_params)
-    @report_entry.report_id = @report.id
-    @report_entry.save
+def create
+  @report = Report.find(params[:report_id])
+
+  @existing_report_entries = ReportEntry.where(report: @report)
+  @existing_report_entries.destroy_all if @existing_report_entries.exists?
+
+  params[:report_entries].each do |index, entry_params|
+    entry = ReportEntry.new(report_entries_params(entry_params))
+    entry.report = @report
+    entry.save!
   end
+
+  redirect_to @report, notice: 'All entries saved successfully'
+end
 
   private
 
-  def report_entry_params
-    params.require(:report_entry).permit(:label, :value_text, :value_json)
+  def report_entries_params(entry_params)
+    entry_params.permit(:label, :value_text, :value_json)
   end
 end
