@@ -14,8 +14,9 @@ User.destroy_all
 Company.destroy_all
 
 chrix = Company.create!(name: "Chrix")
+nokia = Company.create!(name: "nokia")
 amine = User.create!(email: "amine.e@chrix.ma", password: "123456", first_name: "Amine", last_name: "EL", company_id: Company.first.id)
-
+haytham = User.create!(email: "hitoburn@hotmail.fr", password: "123456", first_name: "Haytham", last_name: "LAN", company_id: Company.second.id)
 
 ReportTemplate.create!(name: "Template A", description: "template A", company: chrix, user: amine)
 ReportTemplate.create!(name: "Template B", description: "template B", company: chrix, user: amine)
