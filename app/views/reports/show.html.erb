@@ -1,3 +1,37 @@
-<h1> <%= @report.to_json %> </h1>
+<div class="report-show">
+  <h1>Titre : <%= @report.title %></h1>
 
-<%= link_to "Edit report", edit_report_path(@report) %>
+  <div class="report-info">
+    <p><strong>Status:</strong> <%= @report.status %></p>
+    <p><strong>Version:</strong> <%= @report.report_version_number %></p>
+    <p><strong>Template:</strong> <%= @report.report_template.name %></p>
+    <p><strong>User:</strong> <%= @report.user.email %></p>
+    <p><strong>Created:</strong> <%= @report.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+
+  <% if @report.report_entries.any? %>
+    <h2>Report Entries</h2>
+    <table class="report-entries">
+      <thead>
+        <tr>
+          <th>Label</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @report.report_entries.each do |entry| %>
+          <tr>
+            <td><%= entry.label %></td>
+            <td><%= entry.value_text %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No entries added yet.</p>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to "Edit report", edit_report_path(@report) %>
+  </div>
+</div>
