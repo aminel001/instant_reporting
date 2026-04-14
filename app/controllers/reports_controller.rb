@@ -23,6 +23,11 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
   end
 
+  def edit
+    @report = Report.find(params[:id])
+    @report_entry = ReportEntry.new
+  end
+
 
   private
 

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+      <h2 class="text-center">Edit <%= @report.title%></h2>
+      <%= simple_form_for([@report, @report_entry]) do |f| %>
+        <% @report.report_template.template_entries.each do |template_entry|%>
+          <%= f.input :label, label: false,  input_html:{value: template_entry.label}, disabled: true %>
+          <input class="form-control string optional" type="text" name="report_entry[value_text]" id="report_entry_value_text" wfd-id="id2">
+        <% end %>
+        <%= f.submit "submit report" %>
+      <% end %>
+    </div>
+  </div>
+</div>

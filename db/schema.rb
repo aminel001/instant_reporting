@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_10_203032) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_14_193950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_10_203032) do
   create_table "report_entries", force: :cascade do |t|
     t.string "value_text"
     t.string "value_json"
+    t.string "label"
     t.bigint "report_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,6 +82,15 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_10_203032) do
     t.datetime "updated_at", null: false
     t.index ["report_template_id"], name: "index_reports_on_report_template_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
+  create_table "template_entries", force: :cascade do |t|
+    t.string "label"
+    t.string "field_type"
+    t.bigint "report_template_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_template_id"], name: "index_template_entries_on_report_template_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -119,5 +129,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_10_203032) do
   add_foreign_key "report_templates", "users"
   add_foreign_key "reports", "report_templates"
   add_foreign_key "reports", "users"
+  add_foreign_key "template_entries", "report_templates"
   add_foreign_key "users", "companies"
 end

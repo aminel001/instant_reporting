@@ -6,8 +6,11 @@ Rails.application.routes.draw do
     resource :reports, only: [:new, :create]
     end
 
-  resources :reports, only: [:index, :show, :destroy, :update, :edit]
-  resources :report_entries
+  resources :reports, only: [:index, :show, :destroy, :update, :edit] do
+    resources :report_entries, only: [:create]
+    end
+
+  resources :report_entries, except: [:create]
   resources :companies
   resources :users, only: [:create]
 
