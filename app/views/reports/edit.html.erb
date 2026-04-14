@@ -1,15 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-
       <h2 class="text-center">Edit <%= @report.title%></h2>
-      <%= simple_form_for([@report, @report_entry]) do |f| %>
-        <% @report.report_template.template_entries.each do |template_entry|%>
-          <%= f.input :label, label: false,  input_html:{value: template_entry.label}, disabled: true %>
-          <input class="form-control string optional" type="text" name="report_entry[value_text]" id="report_entry_value_text" wfd-id="id2">
+
+      <form action="<%= report_report_entries_path(@report) %>" method="post">
+        <% @report.report_template.template_entries.each_with_index do |template_entry, index| %>
+          <div class="form-group">
+            <label><%= template_entry.label %></label>
+            <input class="form-control" type="hidden"
+                   name="report_entries[<%= index %>][label]"
+                   id="report_entry_label<%= index %>" type='hidden' value="<%= template_entry.label %>">
+            <input class="form-control" type="text"
+                   name="report_entries[<%= index %>][value_text]"
+                   id="report_entry_<%= index %>">
+
+          </div>
         <% end %>
-        <%= f.submit "submit report" %>
-      <% end %>
+
+        <button type="submit" class="btn btn-primary">Save All Entries</button>
+      </form>
     </div>
   </div>
 </div>
