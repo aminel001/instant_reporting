@@ -11,21 +11,53 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", main_path, class: "nav-link" %>
-          </li>
+
+          <% unless current_page?(root_path) %>
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <% unless current_page?(about_path) %>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "nav-link" %>
+            </li>
+          <% end %>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://avatars.githubusercontent.com/u/238833230?v=4", class: "avatar", alt: "dropdown menu" %>
-          </a>
+          <% if user_signed_in? %>
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown">
+
+              <% if current_user.profile_photo.attached? %>
+                <%= cl_image_tag current_user.profile_photo.key,
+                      height: 100,
+                      crop: :limit,
+                      class: "avatar",
+                      alt: "dropdown menu" %>
+              <% else %>
+                <div class="avatar bg-light text-dark d-flex align-items-center justify-content-center">
+                  <%= current_user.first_name.first.upcase %>
+                </div>
+              <% end %>
+
+            </a>
+          <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Edit my information", "#", class: "dropdown-item" %>
+              <%= link_to "Edit my information", edit_user_path(current_user),class: "dropdown-item" %>
               <%= link_to "Manage my organization", edit_company_path(current_user.company), class: "dropdown-item" %>
               <%= link_to "Manage all organizations", companies_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
+          <% unless current_page?(root_path) %>
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <% unless current_page?(about_path) %>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "nav-link" %>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>

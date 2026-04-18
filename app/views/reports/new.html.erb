@@ -3,9 +3,6 @@
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <h1 class="display-4 fw-bold mb-4">Let's create a new report</h1>
-        <p class="lead mb-5">Choose from templates</p>
-            <h1>New report</h1>
-
               <%= simple_form_for [@report_template, @report] do |f| %>
                 <%= f.input :title %>
                 <%= f.submit "create report", class: "btn btn-primary" %>

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+      <h2 class="text-center">Edit <%= @user.first_name%></h2>
+      <%= simple_form_for(@user) do |f| %>
+        <%= f.input :email, disabled: true, hint: 'You cannot change this field' %>
+        <%= f.input :role, as: :select, collection: ["Manager", "Junior"] %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+
+ <div class="row mb-3 text-center">
+
+    <!-- CURRENT PHOTO -->
+    <div class="col">
+      <p class="text-muted mb-1">Current</p>
+      <% if @user.profile_photo.attached? %>
+        <%= cl_image_tag @user.profile_photo.key,
+              height: 120,
+              crop: :limit,
+              class: "img-fluid rounded" %>
+      <% else %>
+        <div class="bg-light text-dark d-flex align-items-center justify-content-center rounded"
+             style="height: 120px;">
+          No photo
+        </div>
+      <% end %>
+    </div>
+
+    <!-- NEW PREVIEW -->
+    <div class="col">
+      <p class="text-muted mb-1">updated</p>
+      <img id="photo-preview"
+           src="#"
+           style="max-height: 120px; display: none;"
+           class="img-fluid rounded" />
+    </div>
+
+  </div>
+
+        <%= f.input :profile_photo do %>
+          <%= f.file_field :profile_photo,
+                id: "photo-input",
+                class: "form-control" %>
+        <% end %>
+
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>

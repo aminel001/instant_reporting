@@ -4,12 +4,37 @@
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <h1 class="display-4 fw-bold mb-4">Main Dashboard</h1>
-        <p class="lead mb-5">[Company Name]
-          <img src="[logo-url]" alt="Company Logo" style="height: 48px;" /></p>
-            <p class="lead mb-5">Welcome <%= current_user.first_name %>!</p>
-        <%= link_to "Create New Report A", new_report_template_reports_path(ReportTemplate.first), class: "btn btn-light btn-lg me-3" %>
-        <%= link_to "Create New Report B", new_report_template_reports_path(ReportTemplate.second), class: "btn btn-light btn-lg me-3" %>
-        <%= link_to "Create New Report C", new_report_template_reports_path(ReportTemplate.third), class: "btn btn-light btn-lg me-3" %>
+          <div class="d-flex align-items-center justify-content-center gap-3 mb-5">
+            <div style="width: 96px; height: 96px;" class="d-flex align-items-center justify-content-center">
+              <% if current_user.company.logo.present? %>
+                <%= cl_image_tag current_user.company.logo.key,
+                  height: 96,
+                  width: 96,
+                  crop: :limit,
+                  class: "rounded" %>
+                <% else %>
+                <div class="bg-light text-dark rounded d-flex align-items-center justify-content-center"
+                  style="width: 96px; height: 96px;">
+                  <%= current_user.company.name.first.upcase %>
+                </div>
+              <% end %>
+            </div>
+              <p class="lead mb-0"><%= current_user.company.name %></p>
+          </div>
+            <p class="lead mb-5">Welcome back <%= current_user.first_name %>!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero-section d-flex align-items-center justify-content-center text-white text-center py-5" style="background: linear-gradient(135deg, #6e7174 0%, #909497 0%); min-height: 500px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="display-4 fw-bold mb-4">Select a report template</h1>
+        <%= link_to "Template A", new_report_template_reports_path(ReportTemplate.first), class: "btn btn-light btn-lg me-3" %>
+        <%= link_to "Template B", new_report_template_reports_path(ReportTemplate.second), class: "btn btn-light btn-lg me-3" %>
+        <%= link_to "Template C", new_report_template_reports_path(ReportTemplate.third), class: "btn btn-light btn-lg me-3" %>
       </div>
     </div>
   </div>

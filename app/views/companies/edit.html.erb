@@ -6,7 +6,18 @@
       <%= simple_form_for(@company) do |f| %>
         <%= f.input :name, disabled: true, hint: 'You cannot change this field' %>
         <%= f.input :description %>
-        <%= f.input :logo %>
+         <%= f.input :logo do %>
+          <% if @company.logo.attached? %>
+            <div class="mb-2">
+              <%= cl_image_tag @company.logo.key,
+              height: 100,
+              crop: :limit,
+              class: "img-fluid rounded" %>
+            </div>
+            <% end %>
+
+           <%= f.file_field :logo, class: "form-control" %>
+          <% end %>
         <%= f.submit %>
       <% end %>
     </div>
