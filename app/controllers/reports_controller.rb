@@ -28,7 +28,6 @@ class ReportsController < ApplicationController
     @report_entry = ReportEntry.new
   end
 
-
   private
 
   def report_params

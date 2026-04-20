@@ -9,6 +9,6 @@ class PagesController < ApplicationController
   end
 
   def main
+    @reports = Report.where(user_id: current_user.company.users)
   end
-
 end
