@@ -18,15 +18,15 @@
       <table class="report-entries">
         <thead>
           <tr>
-            <td><%= entry.label %></td>
-            <td><%= entry.label == "Titre" ? @report.title : entry.value_text %></td>
+            <td>Title</td>
+            <td>Value</td>
           </tr>
         </thead>
         <tbody>
           <% @report.report_entries.each do |entry| %>
             <tr>
               <td><%= entry.label %></td>
-              <td><%= entry.value_text %></td>
+              <td><%= entry.label == "Titre" ? @report.title : entry.value_text %></td>
             </tr>
           <% end %>
         </tbody>
