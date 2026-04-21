@@ -18,8 +18,8 @@
       <table class="report-entries">
         <thead>
           <tr>
-            <th>Label</th>
-            <th>Value</th>
+            <td><%= entry.label %></td>
+            <td><%= entry.label == "Titre" ? @report.title : entry.value_text %></td>
           </tr>
         </thead>
         <tbody>
@@ -37,9 +37,15 @@
   </div>
 
   <div class="actions">
+<<<<<<< HEAD
     <%= link_to "Edit report", edit_report_path(@report) %>
     <button data-action="click->pdf#download" class="btn btn-secondary btn-sm">
       Download PDF
     </button>
+=======
+    <%= link_to "Edit report", edit_report_path(@report), class: "btn btn-primary" %>
+    <%= link_to "Back to Main dashboard", main_path, class: "btn btn-primary" %>
+    <%= link_to "Delete", report_path(@report), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+>>>>>>> master
   </div>
 </div>
