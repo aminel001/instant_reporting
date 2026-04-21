@@ -22,7 +22,7 @@
         <% @report.report_entries.each do |entry| %>
           <tr>
             <td><%= entry.label %></td>
-            <td><%= entry.value_text %></td>
+            <td><%= entry.label == "Titre" ? @report.title : entry.value_text %></td>
           </tr>
         <% end %>
       </tbody>
@@ -32,6 +32,8 @@
   <% end %>
 
   <div class="actions">
-    <%= link_to "Edit report", edit_report_path(@report) %>
+    <%= link_to "Edit report", edit_report_path(@report), class: "btn btn-primary" %>
+    <%= link_to "Back to Main dashboard", main_path, class: "btn btn-primary" %>
+    <%= link_to "Delete", report_path(@report), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
   </div>
 </div>

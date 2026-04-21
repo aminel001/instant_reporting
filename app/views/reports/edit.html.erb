@@ -5,15 +5,17 @@
 
       <form action="<%= report_report_entries_path(@report) %>" method="post">
         <% @report.report_template.template_entries.each_with_index do |template_entry, index| %>
+          <%# Find the already-saved entry for this label, if it exists %>
+          <% existing_entry = @report.report_entries.find { |e| e.label == template_entry.label } %>
+
           <div class="form-group">
             <label><%= template_entry.label %></label>
-            <input class="form-control" type="hidden"
-                   name="report_entries[<%= index %>][label]"
-                   id="report_entry_label<%= index %>" type='hidden' value="<%= template_entry.label %>">
+            <input type="hidden"
+                  name="report_entries[<%= index %>][label]"
+                  value="<%= template_entry.label %>">
             <input class="form-control" type="text"
-                   name="report_entries[<%= index %>][value_text]"
-                   id="report_entry_<%= index %>">
-
+                  name="report_entries[<%= index %>][value_text]"
+                  value="<%= existing_entry&.value_text %>">
           </div>
         <% end %>
 
