@@ -1,37 +1,45 @@
-<div class="report-show">
-  <h1>Titre : <%= @report.title %></h1>
+<div class="report-show"
+     data-controller="pdf"
+     data-pdf-filename-value="report_<%= @report.id %>.pdf">
 
-  <div class="report-info">
-    <p><strong>Status:</strong> <%= @report.status %></p>
-    <p><strong>Version:</strong> <%= @report.report_version_number %></p>
-    <p><strong>Template:</strong> <%= @report.report_template.name %></p>
-    <p><strong>User:</strong> <%= @report.user.email %></p>
-    <p><strong>Created:</strong> <%= @report.created_at.strftime("%B %d, %Y") %></p>
-  </div>
+  <div data-pdf-target="content">
+    <h1>Titre : <%= @report.title %></h1>
 
-  <% if @report.report_entries.any? %>
-    <h2>Report Entries</h2>
-    <table class="report-entries">
-      <thead>
-        <tr>
-          <th>Label</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @report.report_entries.each do |entry| %>
+    <div class="report-info">
+      <p><strong>Status:</strong> <%= @report.status %></p>
+      <p><strong>Version:</strong> <%= @report.report_version_number %></p>
+      <p><strong>Template:</strong> <%= @report.report_template.name %></p>
+      <p><strong>User:</strong> <%= @report.user.email %></p>
+      <p><strong>Created:</strong> <%= @report.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+
+    <% if @report.report_entries.any? %>
+      <h2>Report Entries</h2>
+      <table class="report-entries">
+        <thead>
           <tr>
-            <td><%= entry.label %></td>
-            <td><%= entry.value_text %></td>
+            <th>Label</th>
+            <th>Value</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>No entries added yet.</p>
-  <% end %>
+        </thead>
+        <tbody>
+          <% @report.report_entries.each do |entry| %>
+            <tr>
+              <td><%= entry.label %></td>
+              <td><%= entry.value_text %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No entries added yet.</p>
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= link_to "Edit report", edit_report_path(@report) %>
+    <button data-action="click->pdf#download" class="btn btn-secondary btn-sm">
+      Download PDF
+    </button>
   </div>
 </div>
