@@ -1,43 +1,43 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
+<div class="form-page">
+  <div class="form-card">
 
-      <h2 class="text-center">Edit <%= @company.name%></h2>
-      <%= simple_form_for(@company) do |f| %>
-        <%= f.input :name, disabled: true, hint: 'You cannot change this field' %>
-        <%= f.input :description %>
-         <%= f.input :logo do %>
-          <% if @company.logo.attached? %>
-            <div class="mb-2">
-              <%= cl_image_tag @company.logo.key,
+    <h2 class="text-center">Edit <%= @company.name %></h2>
+
+    <%= simple_form_for(@company) do |f| %>
+      <%= f.input :name, disabled: true, hint: 'You cannot change this field' %>
+      <%= f.input :description %>
+
+      <%= f.input :logo do %>
+        <% if @company.logo.attached? %>
+          <div class="form-logo-preview mb-3">
+            <%= cl_image_tag @company.logo.key,
               height: 100,
               crop: :limit,
               class: "img-fluid rounded" %>
-            </div>
-            <% end %>
+          </div>
+        <% end %>
 
-           <%= f.file_field :logo, class: "form-control" %>
-          <% end %>
-        <%= f.submit %>
+        <%= f.file_field :logo, class: "form-control" %>
       <% end %>
-    </div>
+
+      <%= f.submit "Update Company", class: "btn form-btn" %>
+    <% end %>
+
   </div>
-</div>
 
+  <div class="form-card mt-4">
 
-<div class="container">
-  <div class="row my-4">
-    <div class="col-md-8 offset-md-2">
+    <h2 class="text-center">Add users for <%= @company.name %></h2>
 
-      <h2 class="text-center">Add users for <%= @company.name%></h2>
-      <%= simple_form_for(@user, url: users_path) do |f| %>
-        <%= f.input :email %>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :role, as: :select, collection: ["Manager", "Junior"] %>
-        <%= f.hidden_field :company_id, value: @company.id %>
-        <%= f.submit "Send invitation" %>
-      <% end %>
-    </div>
+    <%= simple_form_for(@user, url: users_path) do |f| %>
+      <%= f.input :email %>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :role, as: :select, collection: ["Manager", "Junior"] %>
+      <%= f.hidden_field :company_id, value: @company.id %>
+
+      <%= f.submit "Send invitation", class: "btn form-btn" %>
+    <% end %>
+
   </div>
 </div>

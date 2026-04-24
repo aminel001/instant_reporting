@@ -1,0 +1,46 @@
+/* =========================
+   ABOUT PAGE LIGHT STYLE
+========================= */
+
+.about-page {
+  background: #f8fafc; /* light clean */
+  min-height: 100vh;
+  padding: 80px 0;
+}
+
+.about-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.about-header p {
+  color: #000000;
+  max-width: 600px;
+  margin: 15px auto 0;
+}
+
+/* cards */
+.about-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: all .3s ease;
+  text-align: center;
+}
+
+.about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.about-card h3 {
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  color: #040405;
+}
