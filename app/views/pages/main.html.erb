@@ -9,8 +9,8 @@
       <div style="width: 64px; height: 64px;" class="d-flex align-items-center justify-content-center">
         <% if current_user.company.logo.present? %>
           <%= cl_image_tag current_user.company.logo.key,
-            height: 96,
-            width: 96,
+            height: 64,
+            width: 64,
             crop: :limit,
             class: "rounded" %>
         <% else %>

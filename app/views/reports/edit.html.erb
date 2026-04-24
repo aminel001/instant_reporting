@@ -1,26 +1,98 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <h2 class="text-center">Edit <%= @report.title%></h2>
+<div class="report-edit"
+     data-controller="pdf"
+     data-pdf-filename-value="<%= @report.title %>_<%= @report.id %>.V<%= @report.report_version_number %>.pdf">
 
-      <form action="<%= report_report_entries_path(@report) %>" method="post">
-        <% @report.report_template.template_entries.each_with_index do |template_entry, index| %>
-          <%# Find the already-saved entry for this label, if it exists %>
-          <% existing_entry = @report.report_entries.find { |e| e.label == template_entry.label } %>
+  <!-- LEFT: identical to show -->
+  <div class="report-edit__preview">
+    <% if @report.report_version_number == 0 %>
+      <div class="report-unsaved-message">
+        <p>Version 1 of this report hasn't been saved yet.</p>
+      </div>
+    <% else %>
+      <div data-pdf-target="content">
 
-          <div class="form-group">
-            <label><%= template_entry.label %></label>
-            <input type="hidden"
-                  name="report_entries[<%= index %>][label]"
-                  value="<%= template_entry.label %>">
-            <input class="form-control" type="text"
-                  name="report_entries[<%= index %>][value_text]"
-                  value="<%= existing_entry&.value_text %>">
+        <!-- HEADER -->
+        <div class="report-header">
+          <div class="report-header__left">
+            <% company = @report.user.company %>
+            <% if company.logo.attached? %>
+              <% logo_base64 = Base64.strict_encode64(company.logo.download) %>
+              <% logo_mime = company.logo.content_type %>
+              <%= image_tag "data:#{logo_mime};base64,#{logo_base64}", class: "report-logo" %>
+            <% end %>
+            <p class="report-company-name"><%= company.name %></p>
           </div>
-        <% end %>
+          <div class="report-header__center">
+            <h1 class="report-title"><%= @report.title %></h1>
+          </div>
+          <div class="report-header__right"></div>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Save All Entries</button>
-      </form>
-    </div>
+        <!-- METADATA STRIP -->
+        <div class="report-meta">
+          <div class="report-meta__item">
+            <span class="report-meta__label">Date</span>
+            <span class="report-meta__value"><%= @report.created_at.strftime("%B %d, %Y") %></span>
+          </div>
+          <div class="report-meta__item">
+            <span class="report-meta__label">Version</span>
+            <span class="report-meta__value"><%= @report.report_version_number %></span>
+          </div>
+          <div class="report-meta__item">
+            <span class="report-meta__label">Initiator</span>
+            <span class="report-meta__value"><%= @report.user.first_name %> <%= @report.user.last_name %></span>
+          </div>
+        </div>
+
+        <!-- ENTRIES -->
+        <div class="report-entries-section">
+          <% @report.report_entries.each do |entry| %>
+            <% next if entry.label == "Titre" %>
+            <div class="report-entry">
+              <p class="report-entry__label"><%= entry.label %></p>
+              <p class="report-entry__value"><%= entry.value_text.presence || "—" %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- SIGNATURE -->
+        <div class="report-signature">
+          <p class="report-signature__label">Signature</p>
+          <div class="report-signature__line"></div>
+          <p class="report-signature__name"><%= @report.user.first_name %> <%= @report.user.last_name %></p>
+        </div>
+
+      </div>
+    <% end %>
   </div>
+
+  <!-- RIGHT: slim edit sidebar -->
+  <div class="report-edit__sidebar">
+    <p class="report-edit__saving-as">Saving as Version <%= @report.report_version_number + 1 %></p>
+
+    <form action="<%= report_report_entries_path(@report) %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+      <% @report.report_template.template_entries.each_with_index do |template_entry, index| %>
+        <% existing_entry = @report.report_entries.find { |e| e.label == template_entry.label } %>
+        <div class="report-edit__field">
+          <label class="report-edit__field-label"><%= template_entry.label %></label>
+          <input type="hidden"
+                 name="report_entries[<%= index %>][label]"
+                 value="<%= template_entry.label %>">
+          <input class="report-edit__field-input"
+                 type="text"
+                 name="report_entries[<%= index %>][value_text]"
+                 value="<%= existing_entry&.value_text %>">
+        </div>
+      <% end %>
+
+      <button type="submit" class="btn btn-primary w-100 mt-4">
+        Save Version <%= @report.report_version_number + 1 %>
+      </button>
+    </form>
+
+    <%= link_to "Cancel", report_path(@report), class: "btn btn-outline-secondary w-100 mt-2" %>
+  </div>
+
 </div>

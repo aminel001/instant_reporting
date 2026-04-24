@@ -1,47 +1,80 @@
 <div class="report-show"
      data-controller="pdf"
-     data-pdf-filename-value="report_<%= @report.id %>.pdf">
+     data-pdf-filename-value="<%= @report.title %>_<%= @report.id %>.V<%= @report.report_version_number %>.pdf">
 
-  <div data-pdf-target="content">
-    <h1>Titre : <%= @report.title %></h1>
+  <div class="report-split">
 
-    <div class="report-info">
-      <p><strong>Status:</strong> <%= @report.status %></p>
-      <p><strong>Version:</strong> <%= @report.report_version_number %></p>
-      <p><strong>Template:</strong> <%= @report.report_template.name %></p>
-      <p><strong>User:</strong> <%= @report.user.email %></p>
-      <p><strong>Created:</strong> <%= @report.created_at.strftime("%B %d, %Y") %></p>
+    <!-- LEFT: report preview -->
+    <div class="report-split__left">
+      <% if @report.report_version_number == 0 %>
+        <div class="report-unsaved-message">
+          <p>Version 1 of this report hasn't been saved yet.</p>
+        </div>
+      <% else %>
+        <div data-pdf-target="content">
+          <!-- HEADER -->
+          <div class="report-header">
+            <div class="report-header__left">
+              <% company = @report.user.company %>
+              <% if company.logo.attached? %>
+                <% logo_base64 = Base64.strict_encode64(company.logo.download) %>
+                <% logo_mime = company.logo.content_type %>
+                <%= image_tag "data:#{logo_mime};base64,#{logo_base64}", class: "report-logo" %>
+              <% end %>
+              <p class="report-company-name"><%= company.name %></p>
+            </div>
+            <div class="report-header__center">
+              <h1 class="report-title"><%= @report.title %></h1>
+            </div>
+            <div class="report-header__right"></div>
+          </div>
+
+          <!-- METADATA STRIP -->
+          <div class="report-meta">
+            <div class="report-meta__item">
+              <span class="report-meta__label">Date</span>
+              <span class="report-meta__value"><%= @report.created_at.strftime("%B %d, %Y") %></span>
+            </div>
+            <div class="report-meta__item">
+              <span class="report-meta__label">Version</span>
+              <span class="report-meta__value"><%= @report.report_version_number %></span>
+            </div>
+            <div class="report-meta__item">
+              <span class="report-meta__label">Initiator</span>
+              <span class="report-meta__value"><%= @report.user.first_name %> <%= @report.user.last_name %></span>
+            </div>
+          </div>
+
+          <!-- ENTRIES -->
+          <div class="report-entries-section">
+            <% @report.report_entries.each do |entry| %>
+              <% next if entry.label == "Titre" %>
+              <div class="report-entry">
+                <p class="report-entry__label"><%= entry.label %></p>
+                <p class="report-entry__value"><%= entry.value_text.presence || "—" %></p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- SIGNATURE -->
+          <div class="report-signature">
+            <p class="report-signature__label">Signature</p>
+            <div class="report-signature__line"></div>
+            <p class="report-signature__name"><%= @report.user.first_name %> <%= @report.user.last_name %></p>
+          </div>
+        </div>
+      <% end %>
     </div>
 
-    <% if @report.report_entries.any? %>
-      <h2>Report Entries</h2>
-      <table class="report-entries">
-        <thead>
-          <tr>
-            <td>Title</td>
-            <td>Value</td>
-          </tr>
-        </thead>
-        <tbody>
-          <% @report.report_entries.each do |entry| %>
-            <tr>
-              <td><%= entry.label %></td>
-              <td><%= entry.label == "Titre" ? @report.title : entry.value_text %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p>No entries added yet.</p>
-    <% end %>
-  </div>
+    <!-- RIGHT: actions -->
+    <div class="report-split__right">
+      <%= link_to "Edit report", edit_report_path(@report), class: "btn btn-primary w-100 mb-2" %>
+      <%= link_to "Back to dashboard", main_path, class: "btn btn-outline-secondary w-100 mb-2" %>
+      <% if @report.report_version_number > 0 %>
+        <button data-action="click->pdf#download" class="btn btn-secondary w-100 mb-2">Download PDF</button>
+      <% end %>
+      <%= link_to "Delete", report_path(@report), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger w-100" %>
+    </div>
 
-  <div class="actions">
-    <%= link_to "Edit report", edit_report_path(@report), class: "btn btn-primary" %>
-    <%= link_to "Back to Main dashboard", main_path, class: "btn btn-primary" %>
-    <%= link_to "Delete", report_path(@report), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-    <button data-action="click->pdf#download" class="btn btn-secondary btn-sm">
-      Download PDF
-    </button>
   </div>
 </div>

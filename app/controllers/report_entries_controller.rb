@@ -15,6 +15,10 @@ def create
     entry.save!
   end
 
+  @report.report_version_number += 1
+  @report.status = "Saved"
+  @report.save!
+
   redirect_to @report, notice: 'All entries saved successfully'
 end
 

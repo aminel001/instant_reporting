@@ -1,0 +1,226 @@
+// The content div is constrained to A4 width (794px = 210mm at 96dpi)
+// so html2canvas captures at the right scale before jsPDF maps to A4
+[data-pdf-target="content"] {
+  width: 794px;
+  min-height: 1123px;
+  margin: 2rem auto;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.report-edit {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+
+  &__preview {
+    flex: 1;
+  }
+
+  &__sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 2rem;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 1.5rem;
+  }
+
+  &__saving-as {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $blue;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  &__field {
+    margin-bottom: 1.2rem;
+  }
+
+  &__field-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6c757d;
+    margin-bottom: 0.3rem;
+  }
+
+  &__field-input {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.95rem;
+    color: #212529;
+
+    &:focus {
+      outline: none;
+      border-color: $blue;
+    }
+  }
+}
+
+.report-split {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+
+  &__left {
+    flex: 1;
+  }
+
+  &__right {
+    width: 200px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.report-unsaved-message {
+  width: 794px;
+  padding: 3rem;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  border-radius: 4px;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  padding: 2.5rem 3rem;
+  border-bottom: 3px solid $blue;
+
+  &__left {
+    flex: 1;
+    text-align: center;
+  }
+
+  &__center {
+    flex: 4;
+    text-align: center;
+  }
+
+  &__right {
+    flex: 1;
+  }
+}
+
+.report-logo {
+  max-height: 80px;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+.report-company-name {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6c757d;
+  margin-bottom: 0.4rem;
+}
+
+.report-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #212529;
+  margin: 0;
+}
+
+.report-meta {
+  display: flex;
+  background-color: $light-gray;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 2.5rem;
+
+  &__item {
+    flex: 1;
+    padding: 1rem 3rem;
+    border-right: 1px solid #dee2e6;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #6c757d;
+    margin-bottom: 0.3rem;
+  }
+
+  &__value {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #212529;
+  }
+}
+
+.report-entries-section {
+  padding: 0 3rem 3rem;
+}
+
+.report-entry {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid #dee2e6;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6c757d;
+    margin-bottom: 0.4rem;
+  }
+
+  &__value {
+    font-size: 1rem;
+    color: #212529;
+    margin: 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+}
+
+.report-signature {
+  margin: 2rem 30rem 2rem;
+  width: 200px;
+
+  &__line {
+    border-top: 1px solid #212529;
+    margin-bottom: 0.5rem;
+  }
+
+  &__name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6c757d;
+    margin: 0;
+  }
+}
