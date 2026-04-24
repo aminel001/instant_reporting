@@ -1,155 +1,202 @@
-<!-- HERO SECTION -->
-<section class="hero-section d-flex align-items-center justify-content-center text-white text-center py-5" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); min-height: 500px;">
+<section class="hero-dark">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <h1 class="display-4 fw-bold mb-4">Stop Wasting Time on Report Templates</h1>
-        <p class="lead mb-5">Generate professional civil engineering reports in minutes, not hours. From template to PDF—streamlined.</p>
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="hero-dark__content">
+          <div class="hero-dark__badge">
+            <span>🏗️</span>
+            Built for Civil Engineering Teams
+          </div>
 
-        <% if user_signed_in? %>
-          <span class="text-white">Welcome back, <%= current_user.first_name %>!</span>
-          <%= link_to "Start", main_path, class: "btn btn-light btn-lg me-3" %>
-        <%# else %>
-          <%# link_to "Get Started Free", new_user_registration_path, class: "btn btn-light btn-lg" %>
-        <% end %>
+          <h1 class="hero-dark__title">
+            Generate polished engineering reports
+            <span>in minutes</span>
+          </h1>
+
+          <p class="hero-dark__text">
+            Standardize your workflow, reduce repetitive formatting, and export
+            professional PDF reports faster with a clean reporting platform
+            built for modern teams.
+          </p>
+
+          <div class="hero-dark__actions d-flex flex-column flex-sm-row gap-3">
+            <% if user_signed_in? %>
+              <%= link_to "Go to Dashboard", main_path, class: "btn hero-dark__btn hero-dark__btn--primary btn-lg" %>
+            <% else %>
+              <%= link_to "Login to Start", new_user_session_path, class: "btn hero-dark__btn hero-dark__btn--primary btn-lg" %>
+            <% end %>
+
+            <a href="#problem" class="btn hero-dark__btn hero-dark__btn--secondary btn-lg">
+              See How It Works
+            </a>
+          </div>
+
+          <div class="hero-dark__stats row g-3">
+            <div class="col-4">
+              <div class="hero-dark-stat">
+                <div class="hero-dark-stat__icon hero-dark-stat__icon--blue">⚡</div>
+                <div class="hero-dark-stat__value">5x</div>
+                <div class="hero-dark-stat__label">Faster reports</div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="hero-dark-stat">
+                <div class="hero-dark-stat__icon hero-dark-stat__icon--green">📄</div>
+                <div class="hero-dark-stat__value">PDF</div>
+                <div class="hero-dark-stat__label">Ready exports</div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="hero-dark-stat">
+                <div class="hero-dark-stat__icon hero-dark-stat__icon--purple">👥</div>
+                <div class="hero-dark-stat__value">24/7</div>
+                <div class="hero-dark-stat__label">Team access</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-dark__media">
+          <div class="hero-dark__image-wrap">
+            <%= image_tag "hero-report-dashboard.png", alt: "Construction reporting platform", class: "hero-dark__image" %>
+
+            <div class="hero-dark__image-overlay"></div>
+
+            <div class="hero-dark__floating hero-dark__floating--top">
+              <span class="hero-dark__floating-label">Instant Reporting</span>
+              <strong>Construction-ready reports</strong>
+            </div>
+
+            <div class="hero-dark__floating hero-dark__floating--bottom">
+              <div>
+                <small>Export Speed</small>
+                <strong>5x Faster</strong>
+              </div>
+              <div class="hero-dark__floating-dot"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM SECTION -->
-<section class="problem-section py-5" style="background: #fff;">
+<section id="problem" class="problem-section py-5">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12 text-center">
-        <h2 class="display-6 fw-bold mb-4">The Problem</h2>
-      </div>
+    <div class="section-heading text-center mb-5">
+      <span class="section-kicker">Pain Points</span>
+      <h2 class="section-title">The Problem</h2>
+      <p class="section-subtitle">Manual reporting slows teams down and creates inconsistencies across projects.</p>
     </div>
 
     <div class="row g-4 justify-content-center">
-      <!-- Problem 1: Repetitive Work -->
       <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm text-center p-4">
-          <div style="font-size: 48px; margin-bottom: 20px;">📋</div>
-          <h3 class="h5 fw-bold mb-2">Repetitive Work</h3>
-          <p class="text-muted small">Same structure, different data. Hours lost on formatting.</p>
+        <div class="problem-card h-100 text-center">
+          <div class="problem-icon">📋</div>
+          <h3>Repetitive Work</h3>
+          <p>Same structure, different data. Valuable hours are lost on formatting instead of engineering analysis.</p>
         </div>
       </div>
 
-      <!-- Problem 2: Inconsistency -->
       <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm text-center p-4">
-          <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
-          <h3 class="h5 fw-bold mb-2">Inconsistency</h3>
-          <p class="text-muted small">Different formats across projects. Quality varies.</p>
+        <div class="problem-card h-100 text-center">
+          <div class="problem-icon">⚠️</div>
+          <h3>Inconsistency</h3>
+          <p>Different projects end up with different formats, which affects quality, clarity, and team efficiency.</p>
         </div>
       </div>
 
-      <!-- Problem 3: Time Pressure -->
       <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm text-center p-4">
-          <div style="font-size: 48px; margin-bottom: 20px;">⏰</div>
-          <h3 class="h5 fw-bold mb-2">Time Pressure</h3>
-          <p class="text-muted small">Client deadlines loom. Less time for actual analysis.</p>
+        <div class="problem-card h-100 text-center">
+          <div class="problem-icon">⏰</div>
+          <h3>Time Pressure</h3>
+          <p>Tight client deadlines leave less time for review, insights, and high-value technical work.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS SECTION -->
-<section class="how-it-works-section py-5" style="background: #f0f4f8;">
+<section class="how-it-works-section py-5">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12 text-center">
-        <h2 class="display-6 fw-bold mb-4">How It Works</h2>
-      </div>
+    <div class="section-heading text-center mb-5">
+      <span class="section-kicker">Workflow</span>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">A simple process that turns raw project data into clean, client-ready reports.</p>
     </div>
 
     <div class="row g-4 justify-content-center">
-      <!-- Step 1 -->
       <div class="col-md-4">
-        <div class="text-center">
-          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: #3498db; color: white; width: 60px; height: 60px; font-size: 28px; font-weight: bold;">1</div>
-          <h3 class="h5 fw-bold mb-2">Choose Template</h3>
-          <p class="text-muted small">Select from pre-built report templates for your project type.</p>
+        <div class="step-card text-center h-100">
+          <div class="step-number">1</div>
+          <h3>Choose Template</h3>
+          <p>Select the right report template based on your project type and workflow needs.</p>
         </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="col-md-4">
-        <div class="text-center">
-          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: #3498db; color: white; width: 60px; height: 60px; font-size: 28px; font-weight: bold;">2</div>
-          <h3 class="h5 fw-bold mb-2">Fill in Data</h3>
-          <p class="text-muted small">Enter measurements, observations, and findings in simple forms.</p>
+        <div class="step-card text-center h-100">
+          <div class="step-number">2</div>
+          <h3>Fill in Data</h3>
+          <p>Enter measurements, observations, and findings through simple and structured forms.</p>
         </div>
       </div>
 
-      <!-- Step 3 -->
       <div class="col-md-4">
-        <div class="text-center">
-          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="background: #3498db; color: white; width: 60px; height: 60px; font-size: 28px; font-weight: bold;">3</div>
-          <h3 class="h5 fw-bold mb-2">Generate & Share</h3>
-          <p class="text-muted small">Get a polished PDF ready for clients. Done in minutes.</p>
+        <div class="step-card text-center h-100">
+          <div class="step-number">3</div>
+          <h3>Generate & Share</h3>
+          <p>Export polished PDF reports and deliver professional results in a fraction of the time.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- KEY BENEFITS SECTION -->
-<section class="benefits-section py-5" style="background: #fff;">
+<section class="benefits-section py-5">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12 text-center">
-        <h2 class="display-6 fw-bold mb-4">Why Teams Choose This</h2>
-      </div>
+    <div class="section-heading text-center mb-5">
+      <span class="section-kicker">Benefits</span>
+      <h2 class="section-title">Why Teams Choose This</h2>
+      <p class="section-subtitle">Built to improve consistency, save time, and make delivery smoother for every project.</p>
     </div>
 
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="row g-4">
-          <!-- Benefit 1 -->
-          <div class="col-12">
-            <div class="d-flex gap-3">
-              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
-              <div>
-                <h4 class="fw-bold mb-2">Consistent Quality</h4>
-                <p class="text-muted mb-0">Every report follows your standards. No surprises.</p>
-              </div>
+      <div class="col-lg-9">
+        <div class="benefit-list">
+          <div class="benefit-item d-flex gap-3">
+            <div class="benefit-check">✓</div>
+            <div>
+              <h4>Consistent Quality</h4>
+              <p>Every report follows your standards and formatting rules, with no surprises.</p>
             </div>
           </div>
 
-          <!-- Benefit 2 -->
-          <div class="col-12">
-            <div class="d-flex gap-3">
-              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
-              <div>
-                <h4 class="fw-bold mb-2">Save 5+ Hours Per Report</h4>
-                <p class="text-muted mb-0">Focus on engineering, not formatting.</p>
-              </div>
+          <div class="benefit-item d-flex gap-3">
+            <div class="benefit-check">✓</div>
+            <div>
+              <h4>Save 5+ Hours Per Report</h4>
+              <p>Spend more time on engineering decisions and less on repetitive formatting work.</p>
             </div>
           </div>
 
-          <!-- Benefit 3 -->
-          <div class="col-12">
-            <div class="d-flex gap-3">
-              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
-              <div>
-                <h4 class="fw-bold mb-2">Client-Ready in Minutes</h4>
-                <p class="text-muted mb-0">Professional formatting built in. Export as PDF.</p>
-              </div>
+          <div class="benefit-item d-flex gap-3">
+            <div class="benefit-check">✓</div>
+            <div>
+              <h4>Client-Ready in Minutes</h4>
+              <p>Professional report structure is built in, making exports clean and presentation-ready.</p>
             </div>
           </div>
 
-          <!-- Benefit 4 -->
-          <div class="col-12">
-            <div class="d-flex gap-3">
-              <div class="flex-shrink-0" style="color: #27ae60; font-size: 24px;">✓</div>
-              <div>
-                <h4 class="fw-bold mb-2">Customizable Templates</h4>
-                <p class="text-muted mb-0">Adapt templates to your firm's branding and requirements.</p>
-              </div>
+          <div class="benefit-item d-flex gap-3">
+            <div class="benefit-check">✓</div>
+            <div>
+              <h4>Customizable Templates</h4>
+              <p>Adapt templates to your firm's branding, standards, and project requirements.</p>
             </div>
           </div>
         </div>
@@ -158,34 +205,31 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS SECTION -->
-<section class="testimonials-section py-5" style="background: #f0f4f8;">
+<section class="testimonials-section py-5">
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12 text-center">
-        <h2 class="display-6 fw-bold mb-4">From Teams Like Yours</h2>
-      </div>
+    <div class="section-heading text-center mb-5">
+      <span class="section-kicker">Testimonials</span>
+      <h2 class="section-title">From Teams Like Yours</h2>
+      <p class="section-subtitle">Real value for engineering teams that need speed, consistency, and polish.</p>
     </div>
 
     <div class="row g-4 justify-content-center">
-      <!-- Testimonial 1 -->
       <div class="col-lg-6">
-        <div class="card h-100 border-0 shadow-sm p-4">
-          <p class="mb-4 text-muted fst-italic">"Cut our report generation time from 8 hours to 2. We can now handle more projects without burning out the team."</p>
-          <div>
-            <strong class="d-block" style="color: #2c3e50;">Sarah Chen</strong>
-            <small class="text-secondary">Senior Engineer, Apex Consulting</small>
+        <div class="testimonial-card h-100">
+          <p class="testimonial-text">“Cut our report generation time from 8 hours to 2. We can now handle more projects without burning out the team.”</p>
+          <div class="testimonial-author">
+            <strong>Sarah Chen</strong>
+            <small>Senior Engineer, Apex Consulting</small>
           </div>
         </div>
       </div>
 
-      <!-- Testimonial 2 -->
       <div class="col-lg-6">
-        <div class="card h-100 border-0 shadow-sm p-4">
-          <p class="mb-4 text-muted fst-italic">"Clients love the professional reports. It reflects well on our firm and we spend zero time reformatting."</p>
-          <div>
-            <strong class="d-block" style="color: #2c3e50;">Marcus Rodriguez</strong>
-            <small class="text-secondary">Project Manager, BuildRight Inc</small>
+        <div class="testimonial-card h-100">
+          <p class="testimonial-text">“Clients love the professional reports. It reflects well on our firm and we spend zero time reformatting.”</p>
+          <div class="testimonial-author">
+            <strong>Marcus Rodriguez</strong>
+            <small>Project Manager, BuildRight Inc</small>
           </div>
         </div>
       </div>
@@ -193,20 +237,18 @@
   </div>
 </section>
 
-<!-- FINAL CTA SECTION -->
-<section class="cta-section d-flex align-items-center justify-content-center py-5 text-white text-center" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+<section class="cta-section py-5">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <h2 class="display-6 fw-bold mb-3">Ready to Save Hours on Reports?</h2>
-        <p class="lead mb-4">Start free. No credit card required.</p>
+    <div class="cta-box text-center">
+      <span class="section-kicker">Start Today</span>
+      <h2>Ready to Save Hours on Reports?</h2>
+      <p>Start free and bring consistency, speed, and polish to your engineering workflow.</p>
 
-        <% if @user_signed_in %>
-          <%= link_to "Start", main_path, class: "btn btn-light btn-lg me-3" %>
-        <% #else %>
-          <%# link_to "Create Free Account", new_user_registration_path, class: "btn btn-light btn-lg me-3" %>
-        <% end %>
-      </div>
+      <% if user_signed_in? %>
+        <%= link_to "Go to Dashboard", main_path, class: "btn hero-btn hero-btn--primary btn-lg mt-3" %>
+      <% else %>
+        <%= link_to "Login to Start", new_user_session_path, class: "btn hero-btn hero-btn--primary btn-lg mt-3" %>
+      <% end %>
     </div>
   </div>
 </section>
