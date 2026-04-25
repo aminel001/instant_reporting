@@ -1,16 +1,4 @@
-<p> list of companies </p>
-<ul>
-  <% @companies.each do |company| %>
-    <li><%= link_to company.name, company_path(company)%></li>
-  <%end%>
-</ul>
 
-  <div class="text-left">
-    <%= link_to "Create a new company", new_company_path, class: "btn btn-outline-secondary" %>
-  </div>
-<div class="companies-page">
-
-  <div class="container">
 
     <!-- TITLE -->
     <div class="text-center mb-5">
@@ -26,8 +14,16 @@
 
             <div class="d-flex align-items-center gap-3">
               <div class="company-avatar">
-                <%= company.name.first.upcase %>
+                <% if company.logo.attached? && company.logo.key.present? %>
+                  <%= cl_image_tag company.logo.key,
+                                  height: 100,
+                                  crop: :limit,
+                                  class: "img-fluid rounded" %>
+                <% else %>
+                  <%= company.name.first.upcase %>
+                <% end %>
               </div>
+
 
               <div>
                 <h5 class="mb-0"><%= company.name %></h5>
@@ -43,8 +39,8 @@
     <!-- BUTTON -->
     <div class="text-center mt-5">
       <%= link_to "Create New Company", new_company_path, class: "btn company-main-btn" %>
+      <%= link_to "Back", main_path, class: "btn btn-outline-primary" %>
     </div>
-
   </div>
 
 </div>
