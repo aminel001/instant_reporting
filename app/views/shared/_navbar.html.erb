@@ -41,11 +41,47 @@
             </a>
           <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Edit my information", edit_user_path(current_user),class: "dropdown-item" %>
-              <%= link_to "Manage my organization", edit_company_path(current_user.company), class: "dropdown-item" %>
-              <%= link_to "Manage all organizations", companies_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
+
+              <div class="px-3 py-1 d-flex align-items-center gap-2">
+                <small class="text-muted">Signed in as</small>
+                <span class="badge rounded-pill bg-<%= role_badge_color %>">
+                  <%= role_badge_label %>
+                </span>
+                <% if session[:admin_id] %>
+                  <span class="badge rounded-pill bg-warning text-dark">Impersonating</span>
+                <% end %>
+              </div>
+
+              <%= link_to "Edit my information", edit_user_path(current_user), class: "dropdown-item" %>
+              <% if current_user.admin? || current_user.manager? %>
+                <%= link_to "Manage my organization", company_path(current_user.company), class: "dropdown-item" %>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to "Manage all organizations", companies_path, class: "dropdown-item" %>
+              <% end %>
+
+              <% if current_user.admin? %>
+                <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Sign in as</h6>
+                <% User.where.not(id: current_user.id).order(:email).each do |u| %>
+                  <%= button_to impersonations_path(user_id: u.id),
+                      method: :post,
+                      class: "dropdown-item",
+                      form: { data: { turbo_confirm: "Switch to #{u.email}?" } } do %>
+                    <%= u.email %> <small class="text-muted">(<%= u.role %>)</small>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <% if session[:admin_id] %>
+                <div class="dropdown-divider"></div>
+                <%= button_to "Switch back to admin", impersonation_path(0),
+                    method: :delete, class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+
+                <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
+
           </li>
         <% else %>
           <% unless current_page?(root_path) %>

@@ -126,6 +126,31 @@
         <button data-action="click->pdf#download" class="btn btn-secondary w-100 mb-2">Download PDF</button>
       <% end %>
       <%= link_to "Delete", report_path(@report), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger w-100" %>
+        <div class="card mt-3"
+        data-controller="report-analyzer"
+        data-report-analyzer-url-value="<%= analyze_report_path(@report) %>">
+      <div class="card-header d-flex align-items-center justify-content-between py-2">
+        <span class="small fw-bold">🤖 AI Quality Check</span>
+        <button class="btn btn-sm btn-outline-primary"
+                data-action="click->report-analyzer#analyze"
+                data-report-analyzer-target="button">
+          Run
+        </button>
+      </div>
+      <div class="card-body py-3">
+        <div data-report-analyzer-target="idle" class="text-muted small mb-0">
+          Click <em>Run</em> to check grammar and coherence.
+        </div>
+        <div data-report-analyzer-target="loading" class="d-none">
+          <div class="d-flex align-items-center">
+            <div class="spinner-border spinner-border-sm me-2 text-primary" role="status"></div>
+            <span class="small">Analyzing…</span>
+          </div>
+        </div>
+        <div data-report-analyzer-target="result" class="d-none"></div>
+      </div>
+    </div>
+
     </div>
 
   </div>

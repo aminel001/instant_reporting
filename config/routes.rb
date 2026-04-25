@@ -8,11 +8,16 @@ Rails.application.routes.draw do
 
   resources :reports, only: [:index, :show, :destroy, :update, :edit] do
     resources :report_entries, only: [:create]
+    member do
+      post :analyze
     end
+  end
 
   resources :report_entries, except: [:create]
   resources :companies
   resources :users, only: [:create, :edit, :update]
+
+  resources :impersonations, only: %i[create destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
