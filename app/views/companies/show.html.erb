@@ -8,6 +8,7 @@
       <th>Photo</th>
       <th>Full Name</th>
       <th>Role</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -22,10 +23,17 @@
         </td>
         <td><%= "#{user.first_name} #{user.last_name}" %></td>
         <td><%= user.role %></td>
+        <td>
+          <% if policy(user).edit? %>
+            <%= link_to "Edit", edit_user_path(user), class: "btn btn-sm btn-outline-secondary" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "Edit", edit_company_path%>
-<%= link_to "Back", companies_path%>
+<div class="text-center">
+    <%= link_to "Edit", edit_company_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "Back", companies_path, class: "btn btn-outline-secondary" %>
+</div>

@@ -28,6 +28,20 @@ class ReportsController < ApplicationController
     @report_entry = ReportEntry.new
   end
 
+def analyze
+  @report = Report.find(params[:id])
+
+  return head :forbidden unless current_user.admin? ||
+                                @report.user_id == current_user.id ||
+                                @report.user.company_id == current_user.company_id
+
+  @result = ReportAnalyzer.new(@report).call
+  render partial: "ai_analysis", locals: { result: @result }
+rescue => e
+  render partial: "ai_analysis_error", locals: { message: e.message }, status: :bad_gateway
+end
+
+
   private
 
   def report_params

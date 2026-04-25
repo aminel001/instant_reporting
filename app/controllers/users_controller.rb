@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
+  after_action :verify_authorized
 
   def create
-    @user = User.invite!(user_params, current_user) do |u|
-      u.company = Company.find(params[:user][:company_id])
-    end
+    @user = User.new(user_params)
+    @user.company_id ||= current_user.company_id
+    authorize @user, :create?
+
+    @user = User.invite!(user_params.merge(company_id: @user.company_id), current_user)
+
     if @user.errors.any?
       puts @user.errors.full_messages.inspect
     end
@@ -12,14 +16,16 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize @user
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to(root_path)
+    @user.assign_attributes(user_params)
+    authorize @user
+    @user.save
+    redirect_to(main_path)
   end
-
 
   private
 

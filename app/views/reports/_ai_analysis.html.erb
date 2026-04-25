@@ -1,0 +1,58 @@
+<% grammar_count = result.dig(:grammar, :issues)&.length || 0 %>
+<% score = result.dig(:coherence, :score) || 0 %>
+
+<% summary = result.dig(:coherence, :summary) %>
+<% if summary.present? %>
+  <p class="small text-muted fst-italic mb-2"><%= summary %></p>
+<% end %>
+
+
+<% grammar_class = grammar_count.zero? ? "bg-success" : "bg-warning text-dark" %>
+<% score_class = if score >= 80 then "bg-success"
+                 elsif score >= 60 then "bg-warning text-dark"
+                 else "bg-danger"
+                 end %>
+
+<div class="d-flex align-items-center justify-content-between mb-2">
+  <strong class="small">Grammar</strong>
+  <span class="badge rounded-pill <%= grammar_class %>">
+    <%= grammar_count.zero? ? "No issues" : pluralize(grammar_count, "issue") %>
+  </span>
+</div>
+
+<% if grammar_count.positive? %>
+  <ul class="list-unstyled small mb-3 ps-2">
+    <% result[:grammar][:issues].each do |issue| %>
+      <li class="mb-1">
+        <strong><%= issue[:label] %>:</strong> <%= issue[:problem] %>
+        <div class="text-muted fst-italic">→ <%= issue[:suggestion] %></div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<hr class="my-3">
+
+<div class="d-flex align-items-center justify-content-between mb-2">
+  <strong class="small">Coherence with title</strong>
+  <span class="badge rounded-pill <%= score_class %>"><%= score %>/100</span>
+</div>
+
+<ul class="list-unstyled small mb-0 ps-2">
+  <% (result.dig(:coherence, :per_entry) || []).each do |entry| %>
+    <% icon, color = case entry[:verdict]
+                     when "relevant"  then ["✓", "text-success"]
+                     when "off_topic" then ["✗", "text-danger"]
+                     else                  ["?", "text-warning"]
+                     end %>
+    <li class="mb-1">
+      <span class="<%= color %>"><%= icon %></span>
+      <strong><%= entry[:label] %>:</strong>
+      <span class="text-muted"><%= entry[:note] %></span>
+    </li>
+  <% end %>
+</ul>
+
+<p class="text-muted small mt-3 mb-0">
+  Analyzed <%= Time.current.strftime("%H:%M") %>
+</p>
