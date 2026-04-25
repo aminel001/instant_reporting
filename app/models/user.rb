@@ -7,4 +7,5 @@ class User < ApplicationRecord
   belongs_to :company
   has_many :reports
   has_many :report_templates
+  enum :role, { junior: "junior", manager: "manager", admin: "admin" }, default: "junior"
 end

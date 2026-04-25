@@ -41,7 +41,6 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-gem "sprockets-rails"
 gem "bootstrap", "~> 5.3"
 gem "devise"
 gem "devise_invitable"
@@ -50,6 +49,8 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
+gem "pundit"
+gem "ruby-openai"
 
 group :development, :test do
   gem "dotenv-rails"

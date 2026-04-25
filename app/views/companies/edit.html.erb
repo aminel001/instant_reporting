@@ -27,17 +27,19 @@
 
   <div class="form-card mt-4">
 
-    <h2 class="text-center">Add users for <%= @company.name %></h2>
-
-    <%= simple_form_for(@user, url: users_path) do |f| %>
-      <%= f.input :email %>
-      <%= f.input :first_name %>
-      <%= f.input :last_name %>
-      <%= f.input :role, as: :select, collection: ["Manager", "Junior"] %>
-      <%= f.hidden_field :company_id, value: @company.id %>
-
-      <%= f.submit "Send invitation", class: "btn form-btn" %>
-    <% end %>
-
+      <h2 class="text-center">Add users for <%= @company.name%></h2>
+      <%= simple_form_for(@user, url: users_path) do |f| %>
+        <%= f.input :email %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :role, as: :select, collection: [["Manager", "manager"], ["Junior", "junior"]] %>
+        <%= f.hidden_field :company_id, value: @company.id %>
+        <%= f.submit "Send invitation" %>
+      <% end %>
+    </div>
   </div>
+</div>
+
+<div class="text-center">
+    <%= link_to "Back", company_path(@company.id), class: "btn btn-outline-secondary" %>
 </div>

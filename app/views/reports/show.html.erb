@@ -8,7 +8,59 @@
     <div class="report-split__left">
       <% if @report.report_version_number == 0 %>
         <div class="report-unsaved-message">
-          <p>Version 1 of this report hasn't been saved yet.</p>
+          <p>Version 1 of this report hasn't been saved yet. Please complete the report.</p>
+                  <div data-pdf-target="content">
+          <!-- HEADER -->
+          <div class="report-header">
+            <div class="report-header__left">
+              <% company = @report.user.company %>
+              <% if company.logo.attached? %>
+                <% logo_base64 = Base64.strict_encode64(company.logo.download) %>
+                <% logo_mime = company.logo.content_type %>
+                <%= image_tag "data:#{logo_mime};base64,#{logo_base64}", class: "report-logo" %>
+              <% end %>
+              <p class="report-company-name"><%= company.name %></p>
+            </div>
+            <div class="report-header__center">
+              <h1 class="report-title"><%= @report.title %></h1>
+            </div>
+            <div class="report-header__right"></div>
+          </div>
+
+          <!-- METADATA STRIP -->
+          <div class="report-meta">
+            <div class="report-meta__item">
+              <span class="report-meta__label">Date</span>
+              <span class="report-meta__value"><%= @report.created_at.strftime("%B %d, %Y") %></span>
+            </div>
+            <div class="report-meta__item">
+              <span class="report-meta__label">Version</span>
+              <span class="report-meta__value"><%= @report.report_version_number %></span>
+            </div>
+            <div class="report-meta__item">
+              <span class="report-meta__label">Initiator</span>
+              <span class="report-meta__value"><%= @report.user.first_name %> <%= @report.user.last_name %></span>
+            </div>
+          </div>
+
+          <!-- ENTRIES -->
+          <div class="report-entries-section">
+            <% @report.report_entries.each do |entry| %>
+              <% next if entry.label == "Titre" %>
+              <div class="report-entry">
+                <p class="report-entry__label"><%= entry.label %></p>
+                <p class="report-entry__value"><%= entry.value_text.presence || "—" %></p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- SIGNATURE -->
+          <div class="report-signature">
+            <p class="report-signature__label">Signature</p>
+            <div class="report-signature__line"></div>
+            <p class="report-signature__name"><%= @report.user.first_name %> <%= @report.user.last_name %></p>
+          </div>
+        </div>
         </div>
       <% else %>
         <div data-pdf-target="content">
@@ -74,6 +126,31 @@
         <button data-action="click->pdf#download" class="btn btn-secondary w-100 mb-2">Download PDF</button>
       <% end %>
       <%= link_to "Delete", report_path(@report), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger w-100" %>
+        <div class="card mt-3"
+        data-controller="report-analyzer"
+        data-report-analyzer-url-value="<%= analyze_report_path(@report) %>">
+      <div class="card-header d-flex align-items-center justify-content-between py-2">
+        <span class="small fw-bold">🤖 AI Quality Check</span>
+        <button class="btn btn-sm btn-outline-primary"
+                data-action="click->report-analyzer#analyze"
+                data-report-analyzer-target="button">
+          Run
+        </button>
+      </div>
+      <div class="card-body py-3">
+        <div data-report-analyzer-target="idle" class="text-muted small mb-0">
+          Click <em>Run</em> to check grammar and coherence.
+        </div>
+        <div data-report-analyzer-target="loading" class="d-none">
+          <div class="d-flex align-items-center">
+            <div class="spinner-border spinner-border-sm me-2 text-primary" role="status"></div>
+            <span class="small">Analyzing…</span>
+          </div>
+        </div>
+        <div data-report-analyzer-target="result" class="d-none"></div>
+      </div>
+    </div>
+
     </div>
 
   </div>
